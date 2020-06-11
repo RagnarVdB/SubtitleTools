@@ -1,7 +1,7 @@
 'use strict'
 let subs
-let stretch = 0
-let delay = 1
+let stretch = 1
+let delay = 0
 let filename = 'subtitles.srt'
 
 function changeTime(time) {
@@ -41,15 +41,9 @@ function getSubs() {
   for (let sub of subs) {
     newSubs.push([sub[0], [changeTime(sub[1][0]), changeTime(sub[1][1])], sub[2]])
   }
-  console.log(newSubs)
   let subString = ''
   for (const sub of newSubs) {
-    subString += 
-`${sub[0]}
-${sub[1][0]} --> ${sub[1][1]}
-${sub[2]}
-  
-`
+    subString += `${sub[0]}\r\n${sub[1][0]} --> ${sub[1][1]}\r\n${sub[2]}\r\n`
   }
   download(filename, subString)
 }
@@ -62,7 +56,6 @@ function processFile(input) {
       return [elements[0], times, elements.slice(2, elements.length).join('\n')]
     }
   }).filter(el => (el && el.length === 3))
-  console.log(subs)
   document.getElementById('num1').max = subs.length
   document.getElementById('num2').max = subs.length
   document.getElementById('num2').value = subs.length
@@ -81,7 +74,6 @@ function numberChange() {
 function fileSelected() {
   const fileobj = document.getElementById('fileChooser')
   if ('files' in fileobj && fileobj.files.length !== 0) {
-    console.log('file selected!')
     const file = fileobj.files[0]
     filename = file.name
     const reader = new FileReader()
@@ -105,15 +97,12 @@ function calcValues() {
   const y2 = 3600*secondTime[0] + 60*secondTime[1] + secondTime[2]
   const x1 = hmsToSec(subs[n1 - 1][1][0])
   const x2 = hmsToSec(subs[n2 - 1][1][0])
-  console.log(x1, y1, x2, y2)
   if (y2) {
     stretch = (y2 - y1)/(x2 - x1)
   } else {
     stretch = 1
   }
-  delay = y1 - stretch * x1
-  console.log(stretch, delay)
-  
+  delay = y1 - stretch * x1  
   document.getElementById('stretch').innerHTML = Math.round(stretch * 100000)/1000
   document.getElementById('delay').innerHTML = Math.round(delay*100)/100
 }
