@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subtitletool</title>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="wrapper">
+    <input type="file" accept=".srt"id="fileChooser" onchange="fileSelected()">
+    <div id="time1" class="timeSelector">
+      <div id="firstTime">
+        <input type="text" oninput="calcValues()" placeholder="hours">
+        <span>:</span>
+        <input type="text" oninput="calcValues()" placeholder="minutes">
+        <span>:</span>
+        <input type="text" oninput="calcValues()" placeholder="seconds">
+      </div>
+      <input id = "num1" type="number" min="1" value="1" onchange="numberChange()">
+      <p id="firstSub"></p>
+    </div>
+    <div id="time2" class="timeSelector">
+      <div id="secondTime">
+        <input type="text" oninput="calcValues()" placeholder="hours">
+        <span>:</span>
+        <input type="text" oninput="calcValues()" placeholder="minutes">
+        <span>:</span>
+        <input type="text" oninput="calcValues()" placeholder="seconds">
+      </div>
+      <input id = "num2" type="number" min="1" value="1" onchange="numberChange()">
+      <p id="secondSub"></p>
+    </div>
+    <div>
+      <p>stretch: <span id="stretch">100</span>%</p>
+      <p>delay: <span id="delay">0</span>s</p>
+    </div>
+    <button onclick="getSubs()">Get subtitles</button>
+  </div>
+</body>
+</html>
