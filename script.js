@@ -71,6 +71,47 @@ function numberChange() {
   calcValues()
 }
 
+function dropHandler(event) {
+  event.preventDefault()
+  console.log('dropped something!')
+  let file
+
+  if (event.dataTransfer.items) {
+    if (event.dataTransfer.items[0].kind === 'file') {
+      file = event.dataTransfer.items[0].getAsFile()
+    }
+  } else {
+    file =  event.dataTransfer.files[0]
+  }
+
+  filename = file.name
+  const reader = new FileReader()
+  reader.readAsText(file);
+  reader.onload = () => {
+  processFile(reader.result)
+  }
+  reader.onerror = () => {
+  console.log(reader.error)
+  }
+  const area = document.getElementById('dropArea')
+  area.remove()
+}
+
+function dragHandler(event) {
+  event.preventDefault()
+  console.log('dragging...')
+}
+
+function dragEnter() {
+  const area = document.getElementById('dropArea')
+  area.classList.add('hover')
+}
+
+function dragLeave() {
+  const area = document.getElementById('dropArea')
+  area.classList.remove('hover')
+}
+
 function fileSelected() {
   const fileobj = document.getElementById('fileChooser')
   if ('files' in fileobj && fileobj.files.length !== 0) {
@@ -79,12 +120,14 @@ function fileSelected() {
     const reader = new FileReader()
     reader.readAsText(file);
     reader.onload = () => {
-     const out = processFile(reader.result)
+    processFile(reader.result)
     }
    reader.onerror = () => {
     console.log(reader.error)
    }
   }
+  const area = document.getElementById('dropArea')
+  area.remove()
 }
 
 function calcValues() {

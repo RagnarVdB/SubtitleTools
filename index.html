@@ -9,28 +9,43 @@
 </head>
 <body>
   <div id="wrapper">
-    <input type="file" accept=".srt"id="fileChooser" onchange="fileSelected()">
-    <div id="time1" class="timeSelector">
-      <div id="firstTime">
-        <input type="text" oninput="calcValues()" placeholder="hours">
-        <span>:</span>
-        <input type="text" oninput="calcValues()" placeholder="minutes">
-        <span>:</span>
-        <input type="text" oninput="calcValues()" placeholder="seconds">
+    <p>
+      Simple tool to stretch and delay subtitles. 
+      Select a .srt subtitle file and enter the desired starting time for two different subtitles. 
+      The subtitles will be delayed and stretched accordingly
+    </p>
+      <div id="dropArea" ondrop="dropHandler(event)" ondragover="dragHandler(event)" ondragenter="dragEnter()" ondragleave="dragLeave()">
+        <p>Drop file here or select file below</p>
+        <input type="file" accept=".srt"id="fileChooser" onchange="fileSelected()">
       </div>
-      <input id = "num1" type="number" min="1" value="1" onchange="numberChange()">
-      <p id="firstSub"></p>
+    
+    <div id="time1" class="timeSelector">
+      <p>Select a subtitle using the index number below and enter the desired starting time:</p>
+      <div class="subSelector">
+        <input id = "num1" type="number" min="1" value="1" onchange="numberChange()" class="index">
+        <p id="firstSub"></p>
+      </div>
+      <div id="firstTime">
+        <input type="text" oninput="calcValues()" placeholder="hours" class="timeInput">
+        <span>:</span>
+        <input type="text" oninput="calcValues()" placeholder="minutes" class="timeInput">
+        <span>:</span>
+        <input type="text" oninput="calcValues()" placeholder="seconds" class="timeInput">
+      </div>
+      
     </div>
     <div id="time2" class="timeSelector">
-      <div id="secondTime">
-        <input type="text" oninput="calcValues()" placeholder="hours">
-        <span>:</span>
-        <input type="text" oninput="calcValues()" placeholder="minutes">
-        <span>:</span>
-        <input type="text" oninput="calcValues()" placeholder="seconds">
+      <div class="subSelector">
+        <input id = "num2" type="number" min="1" value="1" onchange="numberChange()" class="index">
+        <p id="secondSub"></p>
       </div>
-      <input id = "num2" type="number" min="1" value="1" onchange="numberChange()">
-      <p id="secondSub"></p>
+      <div id="secondTime">
+        <input type="text" oninput="calcValues()" placeholder="hours" class="timeInput">
+        <span>:</span>
+        <input type="text" oninput="calcValues()" placeholder="minutes" class="timeInput">
+        <span>:</span>
+        <input type="text" oninput="calcValues()" placeholder="seconds" class="timeInput">
+      </div>
     </div>
     <div>
       <p>stretch: <span id="stretch">100</span>%</p>

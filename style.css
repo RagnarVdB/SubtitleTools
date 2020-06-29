@@ -1,3 +1,32 @@
 * {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+#dropArea {
+  width: 600px;
+  height: 300px;
+  border: 5px dashed grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.hover {
+  border: 5px dashed #556fff !important;
+}
+
+.subSelector {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.timeInput {
+  width: 50px
+}
+
+.index {
+  width: 50px;
+}
