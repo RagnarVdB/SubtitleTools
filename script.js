@@ -27,13 +27,15 @@ function secToHms(value) {
 }
 
 function download(filename, text) {
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-  element.setAttribute('download', filename);
-  element.style.display = 'none';
-  document.body.appendChild(element);
-  element.click();
-  document.body.removeChild(element);
+  const element = document.createElement('a')
+  const blob = new Blob([text], {type: 'text/plain', endings: 'native'})
+  element.download = filename
+  element.href = URL.createObjectURL(blob)
+  element.setAttribute('download', filename)
+  element.style.display = 'none'
+  document.body.appendChild(element)
+  element.click()
+  document.body.removeChild(element)
 }
 
 function getSubs() {
@@ -61,6 +63,7 @@ function processFile(input) {
   document.getElementById('num2').value = subs.length
   document.getElementById('firstSub').innerHTML = subs[0][2]
   document.getElementById('secondSub').innerHTML = subs[subs.length - 1][2]
+  console.log(subs[628])
 }
 
 function numberChange() {
@@ -86,7 +89,7 @@ function dropHandler(event) {
 
   filename = file.name
   const reader = new FileReader()
-  reader.readAsText(file);
+  reader.readAsText(file, 'ISO-8859-1');
   reader.onload = () => {
   processFile(reader.result)
   }
