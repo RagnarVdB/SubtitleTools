@@ -22,7 +22,7 @@ function secToHms(value) {
   let hms = String(Math.floor(value / 3600)).padStart(2, 0) + ':'
   hms += String(Math.floor((value % 3600) / 60)).padStart(2, 0) + ':'
   hms += String(Math.floor(value % 60)).padStart(2, 0) + ','
-  hms += String(Math.round((value - Math.floor(value)) * 1000)).padEnd(3, 0)
+  hms += String(Math.round((value - Math.floor(value))*1000)/1000).padEnd(5, 0).slice(2, 5)
   return hms
 }
 
@@ -63,7 +63,6 @@ function processFile(input) {
   document.getElementById('num2').value = subs.length
   document.getElementById('firstSub').innerHTML = subs[0][2]
   document.getElementById('secondSub').innerHTML = subs[subs.length - 1][2]
-  console.log(subs[628])
 }
 
 function numberChange() {
